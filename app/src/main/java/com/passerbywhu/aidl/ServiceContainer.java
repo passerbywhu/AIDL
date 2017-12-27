@@ -19,7 +19,7 @@ public class ServiceContainer extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         mHandler = new Handler();
-        autoCreate();
+        autoIncrement();
         return mBinder;
     }
 
@@ -32,7 +32,7 @@ public class ServiceContainer extends Service {
         return super.onUnbind(intent);
     }
 
-    private void autoCreate() {
+    private void autoIncrement() {
         if (mBinder != null) {
             try {
                 mBinder.setVal(mBinder.getVal() + 1);
@@ -43,7 +43,7 @@ public class ServiceContainer extends Service {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                autoCreate();
+                autoIncrement();
             }
         }, 1000);
     }
